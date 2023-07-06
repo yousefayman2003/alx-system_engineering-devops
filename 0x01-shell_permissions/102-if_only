@@ -1,0 +1,2 @@
+#!/bin/bash
+chown --form=guilaume betty hello
