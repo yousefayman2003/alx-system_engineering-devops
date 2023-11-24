@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# task 3
+
+./1-list_your_processes | grep "bash"

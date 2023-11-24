@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# task 6
+
+kill "$(ps -x | pgrep -f beyond)"

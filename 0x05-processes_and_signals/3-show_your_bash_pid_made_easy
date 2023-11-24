@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# task 4
+
+pgrep -l bash

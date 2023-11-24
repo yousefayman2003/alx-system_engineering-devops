@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# task 8
+
+trap 'echo "I am invincible!!!"' 15
+while [ 1 ]
+do
+	echo "to infinity and beyond"
+	sleep 2
+done
