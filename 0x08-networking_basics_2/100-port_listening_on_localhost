@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# last task
+
+nc -l 98

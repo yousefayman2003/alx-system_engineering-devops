@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# task 1
+
+hostname -I | cut -d' ' -f1 ; hostname -i
