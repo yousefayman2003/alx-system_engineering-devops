@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
 #  script that configures a server to the above requirements
+rm /etc/nginx/sites-enabled/default
 
-default="listen 8080 default_server;"
-new="listen 80 default_server;"
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 
-sudo sed -i "s/$default/$new/" /etc/nginx/sites-enabled/default
-
-sudo sed -i "22d" /etc/nginx/sites-enabled/default
-
-sudo service nginx restart
+service nginx restart
