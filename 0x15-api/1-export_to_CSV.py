@@ -1,36 +1,27 @@
 #!/usr/bin/python3
-"""
-     a Python script that, uses a REST API, for a given employee ID,
-     returns information about his/her TODO list progress.
-"""
+
+"""Python script that gets data from REST API and saves it
+in the CSV format"""
 
 import csv
-import requests
+from requests import get
 from sys import argv
 
+if __name__ == "__main__":
+    response = get('https://jsonplaceholder.typicode.com/todos/')
+    todos_data = response.json()  # Renamed data to todos_data
+    response2 = get('https://jsonplaceholder.typicode.com/users')
+    users_data = response2.json()  # Renamed data2 to users_data
 
-def scrape(id):
-    """Scrape data from REST API"""
-    user_name = requests.get(
-        f"https://jsonplaceholder.typicode.com/users/{id}",).json()["name"]
+    for user in users_data:  # Changed variable name to user
+        if user['id'] == int(argv[1]):
+            employee = user['username']
 
-    todo_data = requests.get(
-        f"https://jsonplaceholder.typicode.com/todos",).json()
-
-    with open(f"{id}.csv", "w", newline="") as f:
+    with open(argv[1] + '.csv', 'w', newline='') as f:
         writer = csv.writer(f, quoting=csv.QUOTE_ALL)
 
-        for data in todo_data:
-            row = []
-            if data["userId"] == id:
-                row.append(id)
-                row.append(user_name)
-                row.append(data["completed"])
-                row.append(data["title"])
-
+        for todo in todos_data:  # Changed variable name to todo
+            if todo['userId'] == int(argv[1]):
+                row = [todo['userId'], employee, todo['completed']]
+                row.append(todo['title'])
                 writer.writerow(row)
-
-
-if __name__ == "__main__":
-    id = int(argv[1])
-    scrape(id)
